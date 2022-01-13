@@ -32,9 +32,6 @@ def profile(request, username):
     context = {
         'user': user,
     }
-    """
-    NEED TO REFACTOR THIS SHITE!
-    """
     if request.user.is_authenticated and request.user == user: #logged-in user == requested user
         if request.method == 'POST': #form submit button has been pressed
             if user.name_changed_recently():
