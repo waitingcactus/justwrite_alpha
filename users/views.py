@@ -34,19 +34,13 @@ def profile(request, username):
     }
     if request.user.is_authenticated and request.user == user: #logged-in user == requested user
         if request.method == 'POST': #form submit button has been pressed
-            if user.name_changed_recently():
-                messages.error(request, 'You may only change your username once every 30 days.')
-                return redirect('profile', user)
-
             u_form = UserUpdateForm(request.POST, instance=request.user) #instantiate forms with updated info
             p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
             if u_form.is_valid() and p_form.is_valid(): #info entered is valid
+                user.last_name_change = timezone.now()
                 u_form.save()
                 p_form.save()
                 messages.success(request, 'Changes saved.')
-
-                if user.username is not u_form.instance.username: #name was changed
-                    user.last_name_change = timezone.now()
 
                 return redirect('profile', u_form.instance) #u_form.instance returns updated username
 
