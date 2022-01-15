@@ -33,8 +33,8 @@ def profile(request, username):
     }
     if request.user.is_authenticated and request.user == user: #logged-in user == requested user
         if request.method == 'POST': #form submit button has been pressed
-            u_form = UserUpdateForm(request.POST, instance=request.user, request=request) #instantiate forms with updated info
-            p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+            u_form = UserUpdateForm(request.POST, instance=user) #instantiate forms with updated info
+            p_form = ProfileUpdateForm(request.POST, request.FILES, instance=user.profile)
             if u_form.is_valid() and p_form.is_valid(): #info entered is valid
                 user.last_name_change = timezone.now()
                 u_form.save()
@@ -44,7 +44,7 @@ def profile(request, username):
                 return redirect('profile', u_form.instance) #u_form.instance returns updated username
 
         else:
-            u_form = UserUpdateForm(instance=request.user, request=request) #fills forms with logged-in user's info
+            u_form = UserUpdateForm(instance=request.user) #fills forms with logged-in user's info
             p_form = ProfileUpdateForm(instance=request.user.profile)
         context['u_form'] = u_form
         context['p_form'] = p_form

@@ -20,14 +20,11 @@ class UserUpdateForm(forms.ModelForm):
         fields = ('username', 'email')
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
         super(UserUpdateForm, self).__init__(*args, **kwargs)
-        if self.request.user.name_changed_recently():
-            self.fields['username'].required = False
-            self.fields['username'].widget.attrs['disabled'] = "disabled"
-        if self.request.user.email_changed_recently():
-            self.fields['email'].required = False
-            self.fields['email'].widget.attrs['disabled'] = "disabled"
+        if self.instance.name_changed_recently():
+            self.fields['username'].widget.attrs['readonly'] = True
+        if self.instance.email_changed_recently():
+            self.fields['email'].widget.attrs['readonly'] = True
 
     email = forms.EmailField(max_length=60, help_text='')
 
