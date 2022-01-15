@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django_countries.fields import CountryField
 from PIL import Image
 
 
@@ -41,7 +42,10 @@ class User(AbstractBaseUser):
     username = models.CharField(max_length=30, unique=True)
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
+    streak = models.IntegerField(default=0)
+    streak_cont = models.BooleanField(default=False)
     last_name_change = models.DateTimeField(verbose_name='last name change', auto_now=True)
+    last_email_change = models.DateTimeField(verbose_name='last name change', auto_now=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -65,22 +69,33 @@ class User(AbstractBaseUser):
         time = timezone.now() - timezone.timedelta(days=30)
         return time < self.last_name_change
 
+    def email_changed_recently(self):
+        time = timezone.now() - timezone.timedelta(days=30)
+        return time < self.last_email_change
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=1000)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    country = CountryField(default='GB', blank_label='(Select country)')
+    AVATAR_CHOICES = (
+        ('male.jpg', 'default man'),
+        ('female.jpg', 'default woman'),
+        ('turtle.jpg', 'turtle'),
+    )
+    image = models.ImageField(default='turtle.jpg', choices=AVATAR_CHOICES)
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('N', 'Non-binary'),
+        ('O', 'Other'),
+        ('D', 'Prefer not to say'),
+    )
+    gender = models.CharField(default='D', max_length=1, choices=GENDER_CHOICES)
 
     def __str__(self):
         return f"{self.user} Profile"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-
-        img = Image.open(self.image.path)
-
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
 
