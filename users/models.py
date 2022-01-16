@@ -50,6 +50,7 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    country = CountryField(default='GB', blank_label='(Select country)')
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email',]
@@ -77,13 +78,12 @@ class User(AbstractBaseUser):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=1000)
-    country = CountryField(default='GB', blank_label='(Select country)')
     AVATAR_CHOICES = (
-        ('male.jpg', 'default man'),
-        ('female.jpg', 'default woman'),
-        ('turtle.jpg', 'turtle'),
+        ('profile_pics/turtle.jpg', 'turtle'),
+        ('profile_pics/male.jpg', 'default man'),
+        ('profile_pics/female.jpg', 'default woman'),
     )
-    image = models.ImageField(default='turtle.jpg', choices=AVATAR_CHOICES)
+    image = models.ImageField(default='profile_pics/turtle.jpg', choices=AVATAR_CHOICES)
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),

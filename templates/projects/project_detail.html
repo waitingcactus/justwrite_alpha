@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <article class="media content-section">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="{% url 'profile' object.user %}">{{ object.user }}</a>
+          {% if request.user == object.user %}
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'project-edit' object.user object.id %}">Edit</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'project-delete' object.user object.id %}">Delete</a>
+          {% endif %}
+        </div>
+        <h2 class="article-title">{{ object.name }}</h2>
+      </div>
+    </article>
+{% endblock content %}

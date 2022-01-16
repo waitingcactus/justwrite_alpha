@@ -5,7 +5,7 @@
         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'project-create' user %}">Create</a>
         {% for project in user.project_set.all %}
             <div class="content-section">
-                <h1>{{ project.name }}</h1>
+                <a class="mr-2" href="{% url 'project-detail' project.user project.id %}">{{ project.name }}</a>
             </div>
         {% endfor %}
     </div>

@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render, get_object_or_404, reverse
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib import messages
 
 from users.models import User
@@ -22,7 +23,11 @@ def projects(request, username):
         return render(request, 'projects/projects.html', context)
 
 
-class ProjectCreateView(CreateView):
+class ProjectDetailView(LoginRequiredMixin, DetailView):
+    model = Project
+
+
+class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
     fields = ['name', 'file']
 
@@ -31,7 +36,31 @@ class ProjectCreateView(CreateView):
         messages.success(self.request, 'Project successfully created.')
         return super().form_valid(form)
 
-    def form_invalid(self, form):
-        messages.error(self.request, 'Error.')
-        return super().form_invalid(form)
 
+class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Project
+    fields = ['name', 'file']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        messages.success(self.request, 'Project successfully created.')
+        return super().form_valid(form)
+
+    def test_func(self):
+        project = self.get_object()
+        if self.request.user == project.user:
+            return True
+        return False
+
+
+class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Project
+
+    def get_success_url(self):
+        return reverse('projects', kwargs={'username': self.request.user})
+
+    def test_func(self):
+        project = self.get_object()
+        if self.request.user == project.user:
+            return True
+        return False
