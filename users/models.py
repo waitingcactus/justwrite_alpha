@@ -47,7 +47,7 @@ class User(AbstractBaseUser):
     last_name_change = models.DateTimeField(verbose_name='last name change', auto_now=True)
     last_email_change = models.DateTimeField(verbose_name='last name change', auto_now=True)
     is_admin = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     country = CountryField(default='GB', blank_label='(Select country)')
