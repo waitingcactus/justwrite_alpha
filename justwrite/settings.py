@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'projects.apps.ProjectsConfig',
     'main.apps.MainConfig',
+    'forest.apps.ForestConfig',
     'crispy_forms',
     'django_countries',
     'django.contrib.admin',

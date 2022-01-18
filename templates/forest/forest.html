@@ -1,0 +1,12 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <div class="content-section">
+        <h3>Projects</h3>
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'add-tree' user %}">Add tree</a>
+        {% for tree in user.forest.tree_set.all %}
+            <div class="content-section">
+                <a class="mr-2" href="#">Tree</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

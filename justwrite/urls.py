@@ -45,6 +45,7 @@ urlpatterns = [
     path('', main_views.landing, name='landing'),
     path('home/', main_views.home, name='home'),
     path('user/', include('users.urls')),
+    path('forest/', include('forest.urls')),
     path('project/', include('projects.urls')),
 ]
 

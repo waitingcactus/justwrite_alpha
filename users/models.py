@@ -87,7 +87,6 @@ class Profile(models.Model):
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),
-        ('N', 'Non-binary'),
         ('O', 'Other'),
         ('D', 'Prefer not to say'),
     )
@@ -98,4 +97,5 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
 
