@@ -1,5 +1,7 @@
+import tinymce
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib import messages
@@ -25,6 +27,27 @@ def projects(request, username):
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
     model = Project
+    sessionInProgress = False
+
+
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs['pk']
+        project = Project.objects.get(id=pk)
+        project.set_file_contents(self.sessionInProgress)
+        print(project.name)
+        print(project.fileContentsBefore)
+        #tinymce.activeEditor.setContent(project.fileContents)
+        return super(ProjectDetailView, self).get_context_data()
+
+    def post(self, request, **kwargs):
+        self.sessionInProgress = True
+        pk = self.kwargs['pk']
+        project = Project.objects.get(id=pk)
+        project.save_file_contents(request.POST.get('writingEnv'))
+        project.submit_file_contents(request.POST.get('writingEnv'))
+        return HttpResponseRedirect(self.request.path_info)
+
+
 
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):

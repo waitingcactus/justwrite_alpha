@@ -11,5 +11,17 @@
         </div>
         <h2 class="article-title">{{ object.name }}</h2>
       </div>
+
     </article>
+
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <textarea name="writingEnv" id="writingEnv" >{{ project.fileContentsBefore}}</textarea>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="Submitbtn" >Submit Changes</button>
+            </div>
+        </form>
+    </div>
+
 {% endblock content %}

@@ -20,6 +20,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 
 from users import views as user_views
+from writing_env import views as writingEnv_views
 from main import views as main_views
 
 urlpatterns = [
@@ -31,6 +32,7 @@ urlpatterns = [
     path('home/', main_views.home, name='home'),
     path('user/', include('users.urls')),
     path('project/', include('projects.urls')),
+    path('writingEnv/', writingEnv_views.writingEnv, name='writingEnv'),
 ]
 
 if settings.DEBUG:
