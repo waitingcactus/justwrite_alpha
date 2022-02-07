@@ -8,6 +8,7 @@ from django.contrib import messages
 
 from users.models import User
 from .models import Project
+from typing import Type
 
 @login_required
 def projects(request, username):
@@ -52,7 +53,7 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
-    fields = ['name', 'file']
+    fields = ['name', 'file', 'goal', 'progressTracker']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -62,7 +63,15 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
 class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project
-    fields = ['name', 'file']
+    fields = ['name', 'file', 'goal', 'progressTracker']
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+
+        context['goalProgress'] = self.get_object().get_goal_progress()
+        #print(self.get_object().get_goal_progress())
+        return context
 
     def form_valid(self, form):
         form.instance.user = self.request.user

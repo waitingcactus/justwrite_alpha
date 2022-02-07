@@ -4,9 +4,11 @@ import tinymce
 from django.db import models
 from django.dispatch import receiver
 from django.shortcuts import reverse
+from django.forms.fields import *
 
 from users.models import User
 from .validators import validate_file_extension
+import decimal
 
 
 def user_directory_path(instance, filename):
@@ -17,9 +19,55 @@ def user_directory_path_local(user, filename):
 
 
 class Project(models.Model):
+
+    COUNT_OPTIONS = [
+        ('Words', (
+                ('50W','50 Words'),
+                ('100W', '100 Words'),
+                ('200W', '200 Words'),
+                ('500W', '500 Words'),
+                ('1000W', '1000 Words'),
+            )
+        ),
+        ('Time', (
+              ('10M', '10 Minutes'),
+              ('20M', '20 Minutes'),
+              ('30M', '30 Minutes'),
+              ('60M', '1 hour'),
+              ('120M', '2 hours'),
+          )
+        ),
+    ]
+
+    PROGRESS_TYPES = (
+        ('auto', 'Automatic'),
+        ('manual', 'Manual')
+    )
+
+    worddict = {
+
+        "50W":50,
+        "100W": 100,
+        "200W": 200,
+        "500W": 500,
+        "1000W": 1000
+    }
+
+    timedict = {
+
+        "10M": 10,
+        "20M": 20,
+        "30M": 30,
+        "60M": 60,
+        "120M": 120
+    }
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     file = models.FileField(upload_to=user_directory_path, validators=[validate_file_extension])
+    goal = models.CharField(max_length=10, choices=COUNT_OPTIONS, default='50W', null=True)
+    goalProgress = models.DecimalField(max_digits=10, decimal_places=3, default=0)
+    progressTracker = models.CharField(max_length=6, choices=PROGRESS_TYPES, default='auto')
 
     fileContentsBefore = "test! file data not retrieved or displayed"
     fileContentsCurrent = ""
@@ -32,7 +80,7 @@ class Project(models.Model):
         super().__init__(*args, **kwargs)
         try:
             with open(str(self.file.path)) as f:
-                self.fileContentsBefore = f.readlines()
+                self.fileContentsBefore = "".join(f.readlines())
 
         except:
             print("project constructor error")
@@ -66,6 +114,29 @@ class Project(models.Model):
         print("save called")
         self.fileContentsCurrent = data
         print(self.fileContentsCurrent)
+
+    #data getters
+    #sanatises model fields into form fields to support localisation e.g. maths
+
+    def get_goal_progress(self):
+
+        #return #float('{}'.format(self.goalProgress))
+        return self.goalProgress
+
+    def get_streak(self):
+        return int(self.goalProgress)
+
+
+    #progress setter
+    def set_streak(self, data):
+        if "W" in self.goal:
+            self.goalProgress = self.goalProgress + (data/self.worddict[self.goal])
+
+        elif "M" in self.goal:
+            self.goalProgress = self.goalProgress + (data / self.timedict[self.goal])
+
+        else:
+            print("error in goal_type set_streak function")
 
 
 
