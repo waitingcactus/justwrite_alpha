@@ -2,6 +2,7 @@ from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django_countries.fields import CountryField
+from datetime import date
 from PIL import Image
 
 
@@ -30,6 +31,7 @@ class UserManager(BaseUserManager):
             username=username,
         )
 
+        user.is_active = True
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
@@ -42,8 +44,6 @@ class User(AbstractBaseUser):
     username = models.CharField(max_length=30, unique=True)
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True, editable=False)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
-    streak = models.IntegerField(default=0)
-    streak_cont = models.BooleanField(default=False)
     last_name_change = models.DateTimeField(verbose_name='last name change', auto_now=True)
     last_email_change = models.DateTimeField(verbose_name='last name change', auto_now=True)
     is_admin = models.BooleanField(default=False)
@@ -78,12 +78,24 @@ class User(AbstractBaseUser):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=1000)
-    AVATAR_CHOICES = (
-        ('profile_pics/turtle.jpg', 'turtle'),
-        ('profile_pics/male.jpg', 'default man'),
-        ('profile_pics/female.jpg', 'default woman'),
+    streak = models.IntegerField(default=0)
+    streak_done = models.BooleanField(default=False)
+    WORDS_CHOICES = (
+        (2500, '2500'),
+        (1250, '1250'),
+        (500, '500'),
+        (250, '250'),
+        (100, '100'),
+        (50, '50'),
     )
-    image = models.ImageField(default='profile_pics/turtle.jpg', choices=AVATAR_CHOICES)
+    word_target = models.IntegerField(default=500, choices=WORDS_CHOICES)
+    word_count = models.IntegerField(default=0)
+    AVATAR_CHOICES = ( # will refactor all these dicts at some point
+        ('profile_pics/turtle.png', 'turtle'),
+        ('profile_pics/male.png', 'default man'),
+        ('profile_pics/female.png', 'default woman'),
+    )
+    image = models.ImageField(default='profile_pics/turtle.png', choices=AVATAR_CHOICES)
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),

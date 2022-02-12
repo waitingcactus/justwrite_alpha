@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xgycmnr3on60nvef3tvu48r6@u!zdsj+$q5n=ygot^jzbms+=o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.18', 'localhost', '127.0.0.1', '92.21.19.53', 'egeria.site']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'forest.apps.ForestConfig',
     'crispy_forms',
+    'fontawesomefree',
     'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -154,3 +155,5 @@ EMAIL_USE_TLS = True
 # app passwords, generate a password and use that.
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
+SECURE_SSL_REDIRECT = False

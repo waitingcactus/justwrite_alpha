@@ -1,84 +1,389 @@
-body {
-  background: #fafafa;
-  color: #333333;
-  margin-top: 5rem;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: #444444;
-}
-
-ul {
+*{
   margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
 }
-
-.bg-steel {
-  background-color: #5f788a;
+.header{
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(5, 14, 49, 0.7),rgba(5, 14, 49, 0.7)), url(images/login_background.jpg);
+  background-position: center;
+  background-size: cover;
+  position: relative;
 }
-
-.site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+.navbar{
+  background: #368ff4;
 }
-
-.site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+.text-box{
+  width: 90%;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
-
-.site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
+.text-box h1{
+  font-size: 62px;
 }
-
-.content-section {
-  background: #ffffff;
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
+.text-box p{
+  margin: 10px 0 40px;
+  font-size: 14px;
+  color: #fff;
 }
-
-.article-title {
-  color: #444444;
-}
-
-a.article-title:hover {
-  color: #428bca;
+.hero-btn{
+  width: 15%;
+  display: inline-block;
   text-decoration: none;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 12px 34px;
+  font-size: 13px;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+}
+.hero-btn:hover{
+  border: 1px solid #368ff4;
+  background: #368ff4;
+  transition: 0.5s;
 }
 
-.article-content {
-  white-space: pre-line;
+.nav-links .fa:fullscreen{
+  display: none;
 }
 
-.article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
+/*----- landing info -----*/
+
+.landing-info{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 100px;
 }
 
-.article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
+.row{
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+img{
+  width: 150px
+}
+.info-box{
+  flex-basis: 31%;
+  background: #368ff46e;
+  border-radius: 10px;
+  margin-bottom: 5%;
+  padding: 20px 12px;
+  box-sizing: border-box;
+  transition: 0.5s;
+}
+h3{
+  text-align: center;
+  font-weight: 600;
+  margin: 10px 0;
+}
+.info-box:hover{
+  box-shadow: 0 0 20px 0px rgba(0,0,0,0.3);
 }
 
-.article-metadata a:hover {
-  color: #333;
-  text-decoration: none;
+/*----- about us -----*/
+
+.about-us{
+  width: 100%;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  background: #368ff46e;
+}
+.about-us-text{
+  width: 80%;
+  margin: auto;
+  text-align: center;
 }
 
-.article-svg {
-  width: 25px;
-  height: 25px;
+/*----- reviews -----*/
+
+.reviews{
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 75px;
+}
+.user-review{
+  flex-basis: 44%;
+  border-radius: 10px;
+  margin-bottom: 5%;
+  text-align: left;
+  background: #368ff46e;
+  padding: 25px 20px;
+  display: flex;
+}
+.user-review img{
+  height: 75px;
+  width: 75px;
+  margin-left: 5px;
+  margin-right: 30px;
+  border-radius: 50%;
+}
+.user-review p{
+  padding: 0;
+}
+.user-review h3{
+  margin-top: 15px;
+  text-align: left;
+}
+.user-review .fa-star{
+  color: #f44336;
+}
+.user-review .fa-star-half-stroke{
+  color: #f44336;
+}
+
+/*----- footer -----*/
+
+.footer{
+  width: 100%;
+  text-align: center;
+  padding: 30px 0;
+  background: #368ff46e;
+}
+
+.footer h4{
+  margin-bottom: 25px;
+  margin-top: 20px;
+  font-weight: 600;
+}
+.icons .fa-brands{
+    color: #3662f4;
+    margin: 0 13px;
+    cursor: pointer;
+    padding: 18px 0;
+}
+
+/*----- login/register -----*/
+
+.login-background{
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(5, 14, 49, 0.7),rgba(5, 14, 49, 0.7)), url(images/login_background.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+.login-box{
+  width: 20%;
+  color: rgb(0, 0, 0);
+  background: #003866b0;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  align-items: center;
+}
+.btn .btn-outline-info{
+  color: rgb(0, 0, 0);
+}
+
+/*----- home -----*/
+.content-box{
+  margin: auto;
+  width: 150vh;
+  height: 90vh;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.home-box{
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 70px;
+  bottom: 10px;
+  width: 100%;
+  height: 90%;
+  border-style: solid;
+  border-radius: 10px;
+  background-color: #368ff4;
+  display: flex;
+  flex-direction: column;
+  justify-content:top;
+}
+.streak-box{
+  background-image: url(images/streak.png);
+  background-size: 100px;
+  width: 100px;
+  height: 100px;
+  display: table-cell;
   vertical-align: middle;
+  position: relative;
+}
+.streak-box h3{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+}
+.home-top-row{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+.home-bottom-row{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+.home-content-box{
+  display: flex;
+  align-items: center;
+}
+.home-projects-button{
+  width: 30%;
+  height: 40vh;
+  color: rgb(0, 0, 0);
+  background: #ffffffaf;
+  border-radius: 10px;
+  text-align: center;
+  align-items: center;
+  outline: 0;
+  transition: 0.4s;
+}
+.home-projects-button:hover{
+  box-shadow: 0 0 20px 0px rgba(0,0,0,0.5);
+  cursor: pointer;
+  transition: 0.5s;
+  text-decoration: none;
+}
+.home-projects-button h3{
+  size: 20vh;
+  outline: 0;
+}
+.home-projects-button img{
+  border-radius: 5px;
+  width: 30vh;
+  height: 30vh;
 }
 
-.account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
+/*----- projects -----*/
+
+.projects-main-box{
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 70px;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content:top;
+}
+.projects-top-row{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+.projects-top-row .btn{
+  background: #3662f4;
+  border-color: #3662f4;
+}
+.projects-top-row .btn:hover{
+  background: #2848b3;
+}
+.project-box{
+  margin: auto;
+  width: 80%;
+  height: 20vh;
+  position: relative;
+  border-style: solid;
+  border-color: #368ff4;
+  border-radius: 5px;
+  background-image: linear-gradient(rgba(5, 14, 49, 0.7),rgba(5, 14, 49, 0.7)), url(images/login_background.jpg);
+}
+.project-box h4{
+  padding-left: 15px;
+  padding-top: 15px;
+  color: #fff;
+}
+.project-box .btn-container{
+  position: absolute;
+  float: right;
+  right: 15px;
+  bottom: 10px;
+}
+.project-box .btn-container .btn{
+  background: #3662f4;
+  border-color: #3662f4;
+}
+.project-box .btn-container .btn:hover{
+  background: #2848b3;
+}
+.form-box{
+  width: 20%;
+  color: rgb(0, 0, 0);
+  background: #003866b0;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  align-items: center;
 }
 
-.account-heading {
-  font-size: 2.5rem;
+/*----- forest -----*/
+
+.forest-main-box{
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 70px;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content:top;
+}
+.forest-top-row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+.forest-top-row .title{
+  padding-left: 85px;
+}
+.forest-image{
+  margin: auto;
+  width: 80%;
+  height: 70vh;
+  position: relative;
+  border-style: solid;
+  border-color: #368ff4;
+  border-radius: 5px;
+  background-image: linear-gradient(rgba(5, 14, 49, 0.7),rgba(5, 14, 49, 0.7)), url(images/forest-image.jpg);
+}
+.forest-image h3{
+  color: #fff;
+}
+.forest-top-row .btn-container{
+  position: absolute;
+  float: left;
+}
+.forest-top-row .btn-container .btn{
+  background: #3662f4;
+  border-color: #3662f4;
+}
+.forest-top-row .btn-container .btn:hover{
+  background: #2848b3;
 }

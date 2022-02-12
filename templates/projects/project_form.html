@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+{% extends "main/landing_base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
     <div>
@@ -18,12 +18,14 @@
             {% endfor %}
         {% endif %}
     </div>
-    <div class="content-section">
+    <div class="form-box">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Project</legend>
-                {{ form|crispy }}
+                <div class="col-sm-12">
+                    {{ form|crispy }}
+                </div>
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Confirm</button>

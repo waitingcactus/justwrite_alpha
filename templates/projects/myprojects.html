@@ -1,12 +1,22 @@
 {% extends "main/base.html" %}
 {% block content %}
-    <div class="content-section">
-        <h3>Projects</h3>
-        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'project-create' user %}">Create</a>
-        {% for project in user.project_set.all %}
-            <div class="content-section">
-                <a class="mr-2" href="{% url 'project-detail' project.user project.id %}">{{ project.name }}</a>
+    <div class="projects-main-box">
+        <div class="projects-top-row">
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'project-create' user %}">Create new</a>
+            <h3>Projects</h3>
+            <div class="streak-box">
+                <h3>0</h3>
             </div>
+        </div>
+        
+        {% for project in user.project_set.all %}
+            <div class="project-box">
+                <h4>{{ project.name }}</h4>
+                <div class="btn-container">
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="#">Write</a>
+                </div>
+            </div>
+            <br>
         {% endfor %}
     </div>
 {% endblock content %}

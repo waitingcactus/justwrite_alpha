@@ -8,7 +8,10 @@ from .validators import validate_file_extension
 
 
 def user_directory_path(instance, filename):
-    return f'files/{instance.user}/{filename}'
+    path = f'files/{instance.user}/'
+    ext = os.path.splitext(filename)[1]
+    format = instance.name + ext
+    return os.path.join(path, format)
 
 
 class Project(models.Model):

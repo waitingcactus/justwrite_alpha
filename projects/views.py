@@ -1,11 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib import messages
 
+from .forms import ProjectForm
 from users.models import User
 from .models import Project
+
 
 @login_required
 def projects(request, username):
@@ -23,18 +25,26 @@ def projects(request, username):
         return render(request, 'projects/projects.html', context)
 
 
+def create_project(request, username):
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES)
+        user = User.objects.get(username=username)
+        form.instance.user = user
+        if form.is_valid():
+            form.save()
+            return redirect('projects', request.user)
+    else:
+        form = ProjectForm()
+    return render(request, 'projects/project_form.html', {'form': form})
+
+
 class ProjectDetailView(LoginRequiredMixin, DetailView):
     model = Project
 
-
-class ProjectCreateView(LoginRequiredMixin, CreateView):
-    model = Project
-    fields = ['name', 'file']
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        messages.success(self.request, 'Project successfully created.')
-        return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs['pk']
+        project = Project.objects.get(id=pk)
+        return super(ProjectDetailView, self).get_context_data()
 
 
 class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

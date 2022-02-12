@@ -1,4 +1,25 @@
 {% extends "main/base.html" %}
+{% load static %}
 {% block content %}
-    <h1>Welcome, {{ user }}</h1>
+<div class="home-box">
+    <div class="home-top-row">
+        <div class="home-content-box">
+            <h3>{{ user }}</h3>
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        </div>
+        <div class="streak-box">
+            <h3>0</h3>
+        </div>
+    </div>
+    <div class="home-bottom-row">
+            <a class="home-projects-button" href="{% url 'projects' user %}">
+                <h3>Projects</h3>
+                <img src="{% static 'images/pencil.png' %}">
+            </a>
+        <a class="home-projects-button" href="{% url 'forest' user %}">
+            <h3>Forest</h3>
+            <img src="{% static 'images/tree.png' %}">
+        </a>
+    </div>
+</div>
 {% endblock content %}
