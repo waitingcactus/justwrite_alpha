@@ -63,7 +63,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
 class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project
-    fields = ['name', 'file', 'goal', 'progressTracker']
+    fields = ['name', 'file', 'goal', 'progressTracker', 'goalProgress']
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context

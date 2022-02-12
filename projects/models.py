@@ -40,7 +40,7 @@ class Project(models.Model):
     ]
 
     PROGRESS_TYPES = (
-        ('auto', 'Automatic'),
+        ('Automatic', 'Automatic'),
         ('manual', 'Manual')
     )
 
@@ -66,8 +66,8 @@ class Project(models.Model):
     name = models.CharField(max_length=50)
     file = models.FileField(upload_to=user_directory_path, validators=[validate_file_extension])
     goal = models.CharField(max_length=10, choices=COUNT_OPTIONS, default='50W', null=True)
-    goalProgress = models.DecimalField(max_digits=10, decimal_places=3, default=0)
-    progressTracker = models.CharField(max_length=6, choices=PROGRESS_TYPES, default='auto')
+    goalProgress = models.DecimalField(max_digits=10, decimal_places=3, default=0, blank=True)
+    progressTracker = models.CharField(max_length=9, choices=PROGRESS_TYPES, default='auto')
 
     fileContentsBefore = "test! file data not retrieved or displayed"
     fileContentsCurrent = ""

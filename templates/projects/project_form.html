@@ -1,6 +1,19 @@
 {% extends "main/base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'formset/jquery.formset.js' %}"></script>
+<script>
+    function Hide() {
+        if(document.getElementById('id_progressTracker').options[document.getElementById('id_progressTracker').selectedIndex].value == "Automatic") {
+             document.getElementById('div_id_goalProgress').style.display = 'none';
+        }
+        else {
+             document.getElementById('div_id_goalProgress').style.display = '';
+        }
+    };  </script>
+<script type="text/javascript"> window.addEventListener("load", Hide);</script> <script type="text/javascript"> var el = document.getElementById("div_id_progressTracker"); el.addEventListener("click", Hide);</script>
     <div>
         {% if form.errors %}
             {% for field in form %}
