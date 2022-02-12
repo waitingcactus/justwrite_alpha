@@ -13,7 +13,7 @@
             <div class="project-box">
                 <h4>{{ project.name }}</h4>
                 <div class="btn-container">
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="#">Write</a>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'project-detail' project.user project.id %}">Write</a>
                 </div>
             </div>
             <br>
