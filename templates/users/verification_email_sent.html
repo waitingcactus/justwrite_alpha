@@ -1,0 +1,10 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <div class="alert alert-info">
+        We have sent an email, please follow the link in it to verify your account.
+        <small class="text-muted">
+                Not received? <a class="ml-2" href="{% url 'send-email' user %}">Send again</a>
+        </small>
+    </div>
+
+{% endblock content %}

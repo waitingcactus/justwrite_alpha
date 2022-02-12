@@ -1,14 +1,16 @@
 import tinymce
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib import messages
 
+from .forms import ProjectForm
 from users.models import User
 from .models import Project
 from typing import Type
+
 
 @login_required
 def projects(request, username):
@@ -24,6 +26,19 @@ def projects(request, username):
         return render(request, 'projects/myprojects.html', context)
     else:  # return view-only profile page
         return render(request, 'projects/projects.html', context)
+
+
+def create_project(request, username):
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES)
+        user = User.objects.get(username=username)
+        form.instance.user = user
+        if form.is_valid():
+            form.save()
+            return redirect('projects', request.user)
+    else:
+        form = ProjectForm()
+    return render(request, 'projects/project_form.html', {'form': form})
 
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):

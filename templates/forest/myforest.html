@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="forest-main-box">
+        <div class="forest-top-row">
+            <br>
+            <div class="title">
+                <h3>{{ user }}'s Forest</h3>
+            </div>
+            <div class="streak-box">
+                <h3>0</h3>
+            </div>
+        </div>
+        <div class="forest-image">
+            <h3>trees here</h3>
+            <div class="forest-top-row">
+                {% for tree in user.forest.tree_set.all %}
+                <div class="tree-image">
+                    <img src="{% static 'images/tree.png' %}">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="forest-top-row">
+            <div class="btn-container">
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'add-tree' user %}">Add tree</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

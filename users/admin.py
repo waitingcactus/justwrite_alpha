@@ -1,10 +1,16 @@
 from django.contrib import admin
 from .models import User, Profile
 from projects.models import Project
+from forest.models import Tree, Forest
 
 
 class ProjectInline(admin.TabularInline):
     model = Project
+    extra = 1
+
+
+class TreeInline(admin.TabularInline):
+    model = Tree
     extra = 1
 
 
@@ -29,5 +35,11 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user',)
 
 
+class ForestAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    inlines = [TreeInline]
+
+
 admin.site.register(User, MyUserAdmin)
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Forest, ForestAdmin)

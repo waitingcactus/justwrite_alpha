@@ -12,7 +12,10 @@ import decimal
 
 
 def user_directory_path(instance, filename):
-    return f'files/{instance.user}/{filename}'
+    path = f'files/{instance.user}/'
+    ext = os.path.splitext(filename)[1]
+    format = instance.name + ext
+    return os.path.join(path, format)
 
 def user_directory_path_local(user, filename):
     return f'files/{user}/{filename}'

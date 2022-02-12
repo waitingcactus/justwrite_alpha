@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xgycmnr3on60nvef3tvu48r6@u!zdsj+$q5n=ygot^jzbms+=o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.18', 'localhost', '127.0.0.1', '92.21.19.53', 'egeria.site']
 
 
 # Application definition
@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'projects.apps.ProjectsConfig',
     'main.apps.MainConfig',
+    'forest.apps.ForestConfig',
     'crispy_forms',
+    'fontawesomefree',
     'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -142,3 +144,16 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# Set your gmail account details in your os environment variables.
+# If you have 2FA, go to your google account settings -> security ->
+# app passwords, generate a password and use that.
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
+SECURE_SSL_REDIRECT = False

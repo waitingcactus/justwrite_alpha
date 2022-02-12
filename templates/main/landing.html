@@ -2,51 +2,174 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
+    <meta name = "viewport" content="width=device-width, initial-scale="1.0">
+    <title>Egeria</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
-
-    <title>JustWrite</title>
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-        <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'landing' %}">JustWrite</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-            </div>
-            <!-- Navbar Right Side -->
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
-            </div>
+<section class="header">
+  <header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <div class="container">
+        <a class="navbar-brand mr-4" href="{% url 'landing' %}">Egeria</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <div class="navbar-nav mr-auto">
+          </div>
+          <!-- Navbar Right Side -->
+          <div class="navbar-nav">
+              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
           </div>
         </div>
-      </nav>
-    </header>
-
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8">
-            <h2>Landing Page</h2>
-        </div>
       </div>
-    </main>
+    </nav>
+  </header>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<div class="text-box">
+    <h1>Egeria</h1>
+    <p>Unlock your writing potential</p>
+    <a href="{% url 'register' %}" class="hero-btn">Sign-up</a><br>
+    <a href="{% url 'login' %}" class="hero-btn">Log in</a>
+</div>
+
+</section>
+
+<!------ Info ------>
+
+<section class="landing-info">
+    <h1>Info</h1>
+    <p>Lorem ipsum dolor sit amet,
+      consectetuer adipiscing elit,
+      sed diam nonummy nibh euismod
+      tincidunt ut laoreet dolore magna.</p>
+    <div class="row">
+        <div class="info-box">
+            <h3>Set and maintain a daily target</h3>
+            <img src="{% static 'images/target.png' %}">
+        </div>
+        <div class="info-box">
+            <h3>Grow a virtual forest as you work</h3>
+            <img src="{% static 'images/tree.png' %}">
+        </div>
+        <div class="info-box">
+            <h3>Rise to the top of the leaderboards</h3>
+            <img src="{% static 'images/leaderboard.png' %}">
+        </div>
+    </div>
+</section>
+
+<!------ About Us ------>
+
+<section class="about-us">
+  <div class="about-us-text">
+    <h1>About Us</h1>
+    <p>Lorem ipsum dolor sit amet,
+      consectetuer adipiscing elit,
+      sed diam nonummy nibh euismod
+      tincidunt ut laoreet dolore magna.
+    </p>
+  </div>
+  
+</section>
+
+<!------ User reviews ------>
+
+<section class="reviews">
+  <h1>What our users say</h1>
+  
+  <div class="row">
+    <div class="user-review">
+      <img src="{% static 'images/reviewer_1.jfif' %}">
+      <div>
+        <p>Egeria came to my house,
+          killed my dog, tied my son to
+          a tree, and strangled my mother
+          to death.
+        </p>
+        <h3>Robert</h3>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+    </div>
+    <div class="user-review">
+      <img src="{% static 'images/reviewer_2.jfif' %}">
+      <div>
+        <p>How can you expect us to review
+          a product that's not even fully
+          functional yet? Also, how much
+          am I getting paid for this?
+        </p>
+        <h3>Jennifer</h3>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-regular fa-star-half-stroke"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="user-review">
+      <img src="{% static 'images/reviewer_3.jfif' %}">
+      <div>
+        <p>
+          雞屁股信用卡特易購餐交易蛋蛋黃醬裸體冰沙體育直接刺英國廣播公司新聞台灣屬於中國歡迎來到暨區約翰塞納冰冷
+        </p>
+        <h3>Linda</h3>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+      </div>
+    </div>
+    <div class="user-review">
+      <img src="{% static 'images/reviewer_4.jfif' %}">
+      <div>
+        <p>Please help me find my wife. She's
+          been missing for weeks now, these guys
+          haven't been any help at all. Pretty
+          good product though.
+        </p>
+        <h3>Corey</h3>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+      </div>
+    </div>
+  </div>
+    
+</section>
+
+<!------ Footer ------>
+
+<section class="footer">
+    <h4>Contact Us</h4>
+    <p>Lorem ipsum dolor sit amet,
+      consectetuer adipiscing elit,
+      sed diam<br> nonummy nibh euismod
+      tincidunt ut laoreet dolore magna.
+    </p>
+    <div class="icons">
+      <i class="fa-brands fa-facebook-f"></i>
+      <i class="fa-brands fa-twitter"></i>
+      <i class="fa-brands fa-instagram"></i>
+      <i class="fa-brands fa-linkedin"></i>
+    </div>
+</section>
 </body>
 </html>
