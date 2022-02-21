@@ -50,8 +50,8 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
         pk = self.kwargs['pk']
         project = Project.objects.get(id=pk)
         project.set_file_contents(self.sessionInProgress)
-        print(project.name)
-        print(project.fileContentsBefore)
+        #print(project.name)
+        #print(project.fileContentsBefore)
         #tinymce.activeEditor.setContent(project.fileContents)
         return super(ProjectDetailView, self).get_context_data()
 
@@ -59,6 +59,9 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
         self.sessionInProgress = True
         pk = self.kwargs['pk']
         project = Project.objects.get(id=pk)
+        if project.progressTracker == 'Automatic':
+            project.set_streak(request.POST.get('writingEnv'))
+            project.save()
         project.save_file_contents(request.POST.get('writingEnv'))
         project.submit_file_contents(request.POST.get('writingEnv'))
         return HttpResponseRedirect(self.request.path_info)
