@@ -74,6 +74,25 @@ class User(AbstractBaseUser):
         time = timezone.now() - timezone.timedelta(days=30)
         return time < self.last_email_change
 
+    def increment_streak(self):
+        pk = self.pk
+        profile = Profile.objects.get(id=pk)
+        profile.streak += 1
+        profile.save()
+
+    def get_streak(self):
+        pk = self.pk
+        profile = Profile.objects.get(id=pk)
+        return profile.streak
+
+    def wipe_streak(self):
+        pk = self.pk
+        profile = Profile.objects.get(id=pk)
+        profile.streak = 0
+        profile.save()
+
+
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -109,5 +128,6 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
 
 
