@@ -9,7 +9,10 @@ from django.forms.fields import *
 from users.models import User
 from .validators import validate_file_extension
 import decimal
+import string
 
+import re, cgi
+tag_re = re.compile(r'(<!--.*?-->|<[^>]*>)')
 
 def user_directory_path(instance, filename):
     path = f'files/{instance.user}/'
@@ -67,7 +70,7 @@ class Project(models.Model):
     file = models.FileField(upload_to=user_directory_path, validators=[validate_file_extension])
     goal = models.CharField(max_length=10, choices=COUNT_OPTIONS, default='50W', null=True)
     goalProgress = models.DecimalField(max_digits=10, decimal_places=3, default=0, blank=True)
-    progressTracker = models.CharField(max_length=9, choices=PROGRESS_TYPES, default='auto')
+    progressTracker = models.CharField(max_length=9, choices=PROGRESS_TYPES, default='Automatic')
 
     fileContentsBefore = "test! file data not retrieved or displayed"
     fileContentsCurrent = ""
@@ -107,7 +110,7 @@ class Project(models.Model):
     def save_file_contents(self, data):
         print("save called")
         self.fileContentsCurrent = data
-        print(self.fileContentsCurrent)
+        #print(self.fileContentsCurrent)
 
     #data getters
     #sanatises model fields into form fields to support localisation e.g. maths
@@ -120,14 +123,20 @@ class Project(models.Model):
     def get_streak(self):
         return int(self.goalProgress)
 
+    def get_word_count(self, data):
+        no_tags = tag_re.sub('',data)
+        no_nbsp = no_tags.replace("&nbsp"," ")
+        word_count = sum(word.strip(string.punctuation).isalpha() for word in no_nbsp.split())
+        return word_count
+
 
     #progress setter
     def set_streak(self, data):
         if "W" in self.goal:
-            self.goalProgress = self.goalProgress + (data/self.worddict[self.goal])
+            self.goalProgress = self.get_word_count(data)/self.worddict[self.goal]
 
         elif "M" in self.goal:
-            self.goalProgress = self.goalProgress + (data / self.timedict[self.goal])
+            self.goalProgress = data / self.timedict[self.goal]
 
         else:
             print("error in goal_type set_streak function")

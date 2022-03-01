@@ -78,10 +78,14 @@
     <script>
       tinymce.init({
         selector: '#writingEnv',
-        plugins: 'save spellchecker wordcount',
+        width: 700,
+        height: 400,
+        plugins: 'save spellchecker wordcount autoresize',
         toolbar: 'save spellchecker wordcount',
+        min_height: 100,
         save_enablewhendirty: false,
         spellchecker_rpc_url: 'spellchecker.php'
+
       });
     </script>
 </body>
