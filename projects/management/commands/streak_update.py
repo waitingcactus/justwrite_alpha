@@ -5,7 +5,7 @@ from projects.models import Project
 
 class Command(BaseCommand):
 
-    def handle(self, *args, **options):
+    def handle(*args, **options):
         print("checking")
         checked_ids = []
         for project in Project.objects.all():

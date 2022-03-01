@@ -8,6 +8,7 @@ from django.contrib import messages
 
 from .forms import ProjectForm
 from users.models import User
+from .management.commands import streak_update
 from .models import Project
 from typing import Type
 
@@ -23,9 +24,14 @@ def projects(request, username):
         'user': user,
     }
     if request.user.is_authenticated and request.user == user:  # logged-in user == requested user
+
+        if request.method == 'POST':
+            streak_update.Command.handle()
         return render(request, 'projects/myprojects.html', context)
     else:  # return view-only profile page
         return render(request, 'projects/projects.html', context)
+
+
 
 
 def create_project(request, username):
