@@ -5,7 +5,7 @@
     <a class="mr-2" href="{% url 'profile' object.user %}">{{ object.user }}</a>
     <h3>{{ object.name }}</h3>
     <div class="streak-box">
-      <h3>0</h3>
+      <h3>{{ user.profile.streak }}</h3>
     </div>
   </div>
 

@@ -5,7 +5,7 @@
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'project-create' user %}">Create new</a>
             <h3>Projects</h3>
             <div class="streak-box">
-                <h3>0</h3>
+                <h3>{{ user.profile.streak }}</h3>
             </div>
         </div>
         
