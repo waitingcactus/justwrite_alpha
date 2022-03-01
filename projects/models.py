@@ -17,9 +17,6 @@ def user_directory_path(instance, filename):
     format = instance.name + ext
     return os.path.join(path, format)
 
-def user_directory_path_local(user, filename):
-    return f'files/{user}/{filename}'
-
 
 class Project(models.Model):
 
@@ -90,12 +87,6 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('projects', kwargs={'username': self.user})
-
-    def user_directory_path(instance, filename):
-        path = f'files/{instance.user}/'
-        ext = os.path.splitext(filename)[1]
-        format = instance.name + ext
-        return os.path.join(path, format)
 
     def set_file_contents(self, sessionInProgress):
         with open(str(self.file.path)) as f:

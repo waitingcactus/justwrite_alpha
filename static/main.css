@@ -387,3 +387,14 @@ h3{
 .forest-top-row .btn-container .btn:hover{
   background: #2848b3;
 }
+
+/*----- writing -----*/
+
+.project-box{
+  margin: auto;
+  width: 80%;
+  position: relative;
+  border-style: solid;
+  border-color: #368ff4;
+  border-radius: 5px;
+}
