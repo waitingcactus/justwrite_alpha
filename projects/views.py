@@ -33,9 +33,17 @@ def create_project(request, username):
         form = ProjectForm(request.POST, request.FILES)
         user = User.objects.get(username=username)
         form.instance.user = user
+        #form.file = form.file_check(form)
+        file = request.POST.get('file')
+        name = request.POST.get('name')
+        #file.value = form.file_check(file, name)
+        #file.save()
         if form.is_valid():
             form.save()
+            print("project create success")
             return redirect('projects', request.user)
+        else:
+            print("project create failed")
     else:
         form = ProjectForm()
     return render(request, 'projects/project_form.html', {'form': form})

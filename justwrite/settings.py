@@ -158,3 +158,17 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 SECURE_SSL_REDIRECT = False
+
+#Magic Strings/Numbers Config
+#Sort this later
+#I am too lazy rn
+
+#projects/forms.py
+
+file_intro = "Welcome to Egeria!" #input onto creation of an empty file
+
+#projects/management/commands/streak_update.py
+
+goal_progress_total = 1 # 1 = 100%. 2 = 200% etc.
+goal_progress_wipe = 0 # what goal progress is reduced to on streak tick. 0 = 0%
+
